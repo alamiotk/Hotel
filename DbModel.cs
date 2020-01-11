@@ -11,7 +11,9 @@ namespace Uwp_App
     public class DbModel : DbContext
     {
 
-      
+        
+        public DbSet<Rezerwacja> TRezerwacja { get; set; }
+     
 
         public DbSet<Users> TRecepcjonista { get; set; }
 
