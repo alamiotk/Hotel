@@ -21,7 +21,7 @@ namespace Uwp_App
         protected override void OnConfiguring(DbContextOptionsBuilder options)
                 => options.UseSqlite("Data Source=SystemV6.db");
 
-
+//
       
     }
 }
