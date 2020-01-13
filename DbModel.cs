@@ -11,18 +11,19 @@ namespace Uwp_App
     public class DbModel : DbContext
     {
 
-        
+        public DbSet<Atrakcja> TAtrakcja { get; set; }
         public DbSet<Rezerwacja> TRezerwacja { get; set; }
         public DbSet<Meldunek> TMeldunki { get; set; }
-        public DbSet<Atrakcja> TAtrakcja { get; set; }
+        public DbSet<Taxi> TTaxi { get; set; }
         public DbSet<Usterka> TUsterka { get; set; }
+
         public DbSet<Users> TRecepcjonista { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
                 => options.UseSqlite("Data Source=SystemV6.db");
 
-//
+
       
     }
 }
