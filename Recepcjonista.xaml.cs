@@ -34,7 +34,19 @@ namespace Uwp_App
         {
             this.InitializeComponent();
         }
+        
+          private async void Taxi_btn_Click(object sender, RoutedEventArgs e)
+        {
+            var nr = await MSB.PobierzNRezerwacjiAsync();
 
+            if (nr <= 0)
+            {
+                return;
+            }
+            new Taxi().zamowTaxi(nr);
+        }
+        
+        
         private async void Usterka_btn_Click(object sender, RoutedEventArgs e)
         {
 
@@ -142,8 +154,7 @@ namespace Uwp_App
         }
      
 
-
-        private async void Spr_Rezerwazje_btn_Click(object sender, RoutedEventArgs e)
+  private async void Spr_Rezerwazje_btn_Click(object sender, RoutedEventArgs e)
         {
             var odp = await MSB.InputChoise("Rezerwacja: ", "Dodaj nową rezerwację", "Sprawdź już istniejącą");
 
@@ -152,21 +163,28 @@ namespace Uwp_App
                 case ContentDialogResult.Primary:
                     {
                         var nr = await MSB.PobierzNRezerwacjiAsync();
-                        if (nr == 0)
+                        if (nr <= 0)
                         {
-                            return;
+                            return;  // anulowano lub podano zly nr
                         }
 
                         var rezerwacja = new Rezerwacja();
 
 
                         var imie = await MSB.Input("Podaj imię");
+                        if (String.Compare(imie, "-1") == 0) return; // anulowano
+
                         var nazwisko = await MSB.Input("Podaj nazwisko");
+                        if (String.Compare(nazwisko, "-1") == 0) return; // anulowano
+
                         var pesel = await MSB.PobierzNrAsync("pesel");
+                        if (pesel < 0) return; // anulowano
 
                         var nrPokoju = await MSB.PobierzNrAsync("pokoju");
+                        if (nrPokoju < 0) return; // anulowano
 
                         var adres = await MSB.Input("Podaj adres");
+                        if (String.Compare(adres, "-1") == 0) return; // anulowano
 
                         rezerwacja.DodajRezerwacje(imie, nazwisko, pesel, adres, nr, nrPokoju); // po co podawac nr pokoju ? skoro mam sprawdzac po wszytskich pokojach
                     }
@@ -174,9 +192,9 @@ namespace Uwp_App
                 case ContentDialogResult.Secondary:
                     {
                         var nr = await MSB.PobierzNRezerwacjiAsync();
-                        if (nr == 0)
+                        if (nr <= 0)
                         {
-                            return;
+                            return; // anulowano lub podano zly nr
                         }
 
                         var rezerwacja = new Rezerwacja();
@@ -236,6 +254,7 @@ namespace Uwp_App
             }
         }
 
+      
 
         public Recepcjonista(string login, string haslo, int id)
         {
