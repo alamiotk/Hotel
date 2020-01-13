@@ -18,7 +18,7 @@ namespace Uwp_App
         public async void ZajmijMiejsce(int nRezerwacji)
         {
             atrakcja.nRezerwacji = nRezerwacji;
-            //Nierozuiem sensu
+            
             using (var ctx = new DbModel())
             {
                 ctx.TAtrakcja.Add(atrakcja); // dodaj, zarezerwuj
