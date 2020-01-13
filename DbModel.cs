@@ -15,7 +15,7 @@ namespace Uwp_App
         public DbSet<Rezerwacja> TRezerwacja { get; set; }
         public DbSet<Meldunek> TMeldunki { get; set; }
         public DbSet<Atrakcja> TAtrakcja { get; set; }
-
+        public DbSet<Usterka> TUsterka { get; set; }
         public DbSet<Users> TRecepcjonista { get; set; }
 
 
