@@ -35,6 +35,31 @@ namespace Uwp_App
             this.InitializeComponent();
         }
 
+        private async void Usterka_btn_Click(object sender, RoutedEventArgs e)
+        {
+
+            var usterka = new Usterka();
+
+            //var nr = 0;
+            //string numer = "";
+            var numerUsterki = await MSB.Input("Podaj numer usterki");
+            var numerRezerwacji = await MSB.Input("Podaj numer rezerwacji");
+            var opis = await MSB.Input("Opisz");
+
+            int nrUsterki = 0;
+            int nrRezerwacji = 0;
+            try
+            {
+                nrUsterki = int.Parse(numerUsterki);
+                nrRezerwacji = int.Parse(numerRezerwacji);
+                usterka.DodajUsterke(nrRezerwacji, nrUsterki, opis);
+            }
+            catch
+            {
+                await MSB.Print("Podaj poprawne dane");
+            }
+        }
+        
          private async void Atrakcja_btn_Click(object sender, RoutedEventArgs e)
         {
 
