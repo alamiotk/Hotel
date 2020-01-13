@@ -46,7 +46,6 @@ namespace Uwp_App
             new Taxi().zamowTaxi(nr);
         }
         
-        
         private async void Usterka_btn_Click(object sender, RoutedEventArgs e)
         {
 
@@ -54,16 +53,26 @@ namespace Uwp_App
 
             //var nr = 0;
             //string numer = "";
-            var numerUsterki = await MSB.Input("Podaj numer usterki");
-            var numerRezerwacji = await MSB.Input("Podaj numer rezerwacji");
-            var opis = await MSB.Input("Opisz");
-
-            int nrUsterki = 0;
-            int nrRezerwacji = 0;
             try
             {
+
+                int nrUsterki = 0;
+                int nrRezerwacji = 0;
+
+                var numerUsterki = await MSB.Input("Podaj numer usterki");
                 nrUsterki = int.Parse(numerUsterki);
+                if (nrUsterki <= 0) return;
+
+                var numerRezerwacji = await MSB.Input("Podaj numer rezerwacji");
                 nrRezerwacji = int.Parse(numerRezerwacji);
+                if (nrRezerwacji <= 0) return;
+
+                var opis = await MSB.Input("Opisz");
+                if (String.Compare(opis, "-1") == 0) return;// anuluj
+
+                if (string.IsNullOrEmpty(opis)) throw new ArgumentNullException();
+                         
+              
                 usterka.DodajUsterke(nrRezerwacji, nrUsterki, opis);
             }
             catch
@@ -71,7 +80,7 @@ namespace Uwp_App
                 await MSB.Print("Podaj poprawne dane");
             }
         }
-        
+       
          private async void Atrakcja_btn_Click(object sender, RoutedEventArgs e)
         {
 
@@ -105,12 +114,16 @@ namespace Uwp_App
         {
             var nr = await MSB.PobierzNRezerwacjiAsync();
 
-            if (nr == 0)
+            if (nr <= 0)
             {
                 return;
             }
 
             var nrKlucza = await MSB.PobierzNrAsync("klucza");
+            if (nrKlucza > 0)
+            {
+                return; // anulowano
+            }
 
             new Meldunek().Wymelduj(nr, nrKlucza);
 
@@ -120,12 +133,17 @@ namespace Uwp_App
         {
             var nr = await MSB.PobierzNRezerwacjiAsync();
 
-            if (nr == 0)
+            if (nr <= 0)
             {
-                return;
+                return;  // anulowano lub podano zly nr
             }
 
             var nrKlucza = await MSB.PobierzNrAsync("klucza");
+
+            if(nrKlucza < 0)
+            {
+                return; // anulowano
+            }
 
             // sprawdz czy zameldowany
             using (var ctx = new DbModel())
@@ -152,7 +170,6 @@ namespace Uwp_App
                 }
             }
         }
-     
 
   private async void Spr_Rezerwazje_btn_Click(object sender, RoutedEventArgs e)
         {
