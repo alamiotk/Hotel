@@ -35,6 +35,34 @@ namespace Uwp_App
             this.InitializeComponent();
         }
 
+         private async void Atrakcja_btn_Click(object sender, RoutedEventArgs e)
+        {
+
+            var nr = await MSB.PobierzNRezerwacjiAsync();
+
+            if (nr == 0)
+            {
+                return;
+            }
+
+            var res = await MSB.InputChoise("Wybierz typ rezerwacji", "Basen", "Spa");
+
+            var rodzaj = "";
+            if (res == ContentDialogResult.Primary)
+            {
+                rodzaj = "Basen";
+            }
+            else if (res == ContentDialogResult.Secondary)
+            {
+                rodzaj = "Spa";
+            }
+            else
+            {
+                await MSB.Print("Dokonaj wyboru");
+            }
+
+            new Atrakcja().ZarezerwujAtrakcje(nr, rodzaj);
+        }
       
          private async void Wymeldowanie_btn_Click(object sender, RoutedEventArgs e)
         {
