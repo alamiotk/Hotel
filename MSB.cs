@@ -28,9 +28,16 @@ namespace Uwp_App
                 Title = Tytul,
                 IsSecondaryButtonEnabled = false,
                 PrimaryButtonText = "Ok",
+                CloseButtonText = "Anuluj",
             };
-            await dialog.ShowAsync();
-            return inputTextBox.Text;
+            var res = await dialog.ShowAsync();
+
+            if (res == ContentDialogResult.Primary)
+            {
+                return inputTextBox.Text;
+            }
+            return "-1"; // anulowano
+
         }
 
 
@@ -44,8 +51,13 @@ namespace Uwp_App
                 Title = "Podaj godzinę",
                 IsSecondaryButtonEnabled = false,
                 PrimaryButtonText = "Ok",
+                CloseButtonText = "Anuluj",
             };
-            await dialog.ShowAsync();
+            var res = await dialog.ShowAsync();
+            if(res == ContentDialogResult.None)
+            {
+                return TimeSpan.Zero;
+            }
             return inputTextBox.Time;
         }
 
@@ -59,8 +71,13 @@ namespace Uwp_App
                 Title = "Podaj datę",
                 IsSecondaryButtonEnabled = false,
                 PrimaryButtonText = "Ok",
+                CloseButtonText = "Anuluj",
             };
-            await dialog.ShowAsync();
+            var res = await dialog.ShowAsync();
+            if (res == ContentDialogResult.None)
+            {
+                return DateTime.MinValue;
+            }
             return inputTextBox.Date.DateTime;
         }
 
@@ -71,10 +88,11 @@ namespace Uwp_App
             var dialog = new ContentDialog
             {
                 Content = Title,
-              //  Title = Title,
+                //  Title = Title,
                 IsSecondaryButtonEnabled = true,
                 PrimaryButtonText = PrimaryButton,
-                SecondaryButtonText = SecondaryButton
+                SecondaryButtonText = SecondaryButton,
+                CloseButtonText = "Anuluj",
             };
             var res = await dialog.ShowAsync();
             return res;
