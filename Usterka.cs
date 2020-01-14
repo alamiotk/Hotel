@@ -29,7 +29,7 @@ namespace Uwp_App
             using (var ctx = new DbModel())
             {
                 var ask = "SELECT opisUsterki From TUsterka WHERE nrUsterki == '" + opisUsterki + "'";
-                //   var odp = ctx.TUsterka.FromSql(ask);
+                
 
                 var odp = ctx.TUsterka.Where(a => a.nrUsterki == nrUsterki);
 
@@ -40,14 +40,14 @@ namespace Uwp_App
                     if (String.Compare(odp2, opisUsterki) == 0)
                     {
                         CzyUsunieto = SprawdzStatus(nrUsterki);
-                        if (CzyUsunieto) //Usterka o takim opisie została juz zgłoszona oraz została usunieta, tj. pojawiła się znowu -> dodaj znow
+                        if (CzyUsunieto)
                         {
                             this.CzyUsunieto = false;
                         }
                         else
                         {
                             await MSB.Print("Taka usterka jest w naprawie");
-                            //Usterka o takim opisie została juz zgłoszona oraz nie została zakonczona, tj. work in progress
+                           
                             return;
                         }
                     }
@@ -72,9 +72,7 @@ namespace Uwp_App
         {
             using (var ctx = new DbModel())
             {
-                //  var ask = "SELECT CzyUsunieto From usterka WHERE nrUsterki == " + NrUsterki;
-                //   var odp = ctx.TUsterka.FromSql(ask);
-
+               
                 var odp = ctx.TUsterka.Where(a => a.nrUsterki == NrUsterki);
 
                 if (odp.FirstOrDefault<Usterka>().CzyUsunieto)
