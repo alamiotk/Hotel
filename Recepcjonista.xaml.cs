@@ -16,13 +16,11 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
+
 
 namespace Uwp_App
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+  
     public sealed partial class Recepcjonista : Page
     {
         string login, haslo;
@@ -53,8 +51,7 @@ namespace Uwp_App
 
             var usterka = new Usterka();
 
-            //var nr = 0;
-            //string numer = "";
+           
             try
             {
 
@@ -107,7 +104,7 @@ namespace Uwp_App
             else
             {
                 return;
-               // await MSB.Print("Dokonaj wyboru");
+             
             }
 
             new Atrakcja().ZarezerwujAtrakcje(nr, rodzaj);
@@ -151,8 +148,7 @@ namespace Uwp_App
             // sprawdz czy zameldowany
             using (var ctx = new DbModel())
             {
-                //var ask = "SELECT " + nr + " From TMeldunek";
-                //var tmp = ctx.TMeldunki.FromSql(ask);
+                
 
                 var tmp = ctx.TMeldunki.Where(a => a.nrKlucza == nrKlucza).ToArray();
 
@@ -208,7 +204,7 @@ namespace Uwp_App
                         var adres = await MSB.Input("Podaj adres");
                         if (String.Compare(adres, "-1") == 0) return; // anulowano
 
-                        rezerwacja.DodajRezerwacje(imie, nazwisko, pesel, adres, nr, nrPokoju); // po co podawac nr pokoju ? skoro mam sprawdzac po wszytskich pokojach
+                        rezerwacja.DodajRezerwacje(imie, nazwisko, pesel, adres, nr, nrPokoju); 
                     }
                     break;
                 case ContentDialogResult.Secondary:
@@ -239,12 +235,12 @@ namespace Uwp_App
 
                                         using (var ctx = new DbModel())
                                         {
-                                            //  var ask = "SELECT * From TRezerwacja WHERE nRezerwacji==" + nr;
+                                          
 
 
                                             try
                                             {
-                                                // var tmp = ctx.TRezerwacja.FromSql(ask).FirstOrDefault();
+                                              
 
                                                 var tmp = ctx.TRezerwacja.Where(a => a.nRezerwacji == nr).FirstOrDefault();
 
