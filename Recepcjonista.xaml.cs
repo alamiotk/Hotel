@@ -34,8 +34,8 @@ namespace Uwp_App
         {
             this.InitializeComponent();
         }
-        
-          private async void Taxi_btn_Click(object sender, RoutedEventArgs e)
+
+        private async void Taxi_btn_Click(object sender, RoutedEventArgs e)
         {
             var nr = await MSB.PobierzNRezerwacjiAsync();
 
@@ -45,7 +45,9 @@ namespace Uwp_App
             }
             new Taxi().zamowTaxi(nr);
         }
-        
+
+
+
         private async void Usterka_btn_Click(object sender, RoutedEventArgs e)
         {
 
@@ -80,13 +82,13 @@ namespace Uwp_App
                 await MSB.Print("Podaj poprawne dane");
             }
         }
-       
-         private async void Atrakcja_btn_Click(object sender, RoutedEventArgs e)
+
+        private async void Atrakcja_btn_Click(object sender, RoutedEventArgs e)
         {
 
             var nr = await MSB.PobierzNRezerwacjiAsync();
 
-            if (nr == 0)
+            if (nr <= 0)
             {
                 return;
             }
@@ -104,13 +106,14 @@ namespace Uwp_App
             }
             else
             {
-                await MSB.Print("Dokonaj wyboru");
+                return;
+               // await MSB.Print("Dokonaj wyboru");
             }
 
             new Atrakcja().ZarezerwujAtrakcje(nr, rodzaj);
         }
-      
-         private async void Wymeldowanie_btn_Click(object sender, RoutedEventArgs e)
+
+        private async void Wymeldowanie_btn_Click(object sender, RoutedEventArgs e)
         {
             var nr = await MSB.PobierzNRezerwacjiAsync();
 
@@ -171,7 +174,9 @@ namespace Uwp_App
             }
         }
 
-  private async void Spr_Rezerwazje_btn_Click(object sender, RoutedEventArgs e)
+
+
+        private async void Spr_Rezerwazje_btn_Click(object sender, RoutedEventArgs e)
         {
             var odp = await MSB.InputChoise("Rezerwacja: ", "Dodaj nową rezerwację", "Sprawdź już istniejącą");
 
@@ -271,7 +276,6 @@ namespace Uwp_App
             }
         }
 
-      
 
         public Recepcjonista(string login, string haslo, int id)
         {
