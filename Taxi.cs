@@ -25,11 +25,7 @@ namespace Uwp_App
 
             if (godzina <= TimeSpan.Zero) return;
 
-            //if(godzina <= new TimeSpan(0, 0, 0))
-            //{
-            //    await MSB.Print("Podaj godzine");
-            //    return;
-            //}
+         
 
             // zadzwon po taxi
             var odpowiedz = true; // uzyskaj odpowiedz
