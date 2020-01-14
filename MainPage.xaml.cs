@@ -14,13 +14,11 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+
 
 namespace Uwp_App
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+   
     public sealed partial class MainPage : Page
     {
 
@@ -31,11 +29,7 @@ namespace Uwp_App
 
             ApplicationView.GetForCurrentView().SetPreferredMinSize( new Size(450,200));
 
-            //// Delete this !!
-            //txtUser.Text = "Default";
-            //txtPassword.Password = "Default";
-            //txtId.Text = "1";
-            ////            
+               
         }
 
         private async void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -80,9 +74,7 @@ namespace Uwp_App
                 //db.TRecepcjonista
             }
 
-           // var RecepcjonistaDev = new Recepcjonista("Default", "Default", 1);
-
-            //this.Frame.Navigate(typeof(Recepcjonista)); //delete this!!
+        
         }
     }
 }
