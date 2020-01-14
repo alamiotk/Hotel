@@ -10,16 +10,14 @@ namespace Uwp_App
     {
         public async Task<bool> ZaplacAsync(int nRezerwacji)
         {
-            // można by zapisać informacje o platnosci do bazy, ale sprawdz platnosc ma byc voidem czyli nie weryfikuje się tego, rozwniez z tego powodu nie ma mozliwosci przedplaty
-
-            // mozna w do...while dac ta funkcje i sprawdzac jak nacisnieto rezygnacje z platnosci warunek zeby wyjsc z petli
+            
 
             var res = await MSB.InputChoise("Wybierz metodę płatności", "Karta", "Gotówka");
-            // gdy jednoczenie wejdzie sie tutaj wyrzuci wyjatek ze peracja asnchronicznie nie została poprawnie rozpoczeta, // moj blad przypadkowy dwa razy wywolalem new meldunek.sprawdzplatnosc
+           
 
             switch (res)
             {
-                // nieosiaglany kod: break;
+               
                 case Windows.UI.Xaml.Controls.ContentDialogResult.None:
                     {
                         return false;
@@ -49,15 +47,7 @@ namespace Uwp_App
         {
             await MSB.Print("Przyjmij gotówkę");
 
-            /*
-             * Najpierw firma płatnosci
-             * Obijasz kwotę na terminalie
-             * On placi
-             * Potem w komputerze w oknie klikasz
-             * Ale jeszcze musisz zapytać paragon czy fakrura
-             * 
-             * Wg. kolezanki
-             */
+         
         }
 
     }
