@@ -11,7 +11,7 @@ namespace Uwp_App
 {
     public class Atrakcja
     {
-        // Zakaładam że pojęcie "dwa miejsca" to dwie godziny czy;i czas trwania atrakcji
+        
 
         [Key]
         public int _id { get; set; }
@@ -72,17 +72,12 @@ namespace Uwp_App
             }
         }
 
-        /// <summary>
-        /// Zwraza Czy zajęta atkrakcja o czasie podanym w klasie
-        /// </summary>
-        /// <param name="rodzaj">Rodzaj atrakcji</param>
-        /// <returns> true - zajęte </returns>
+     
         public bool Sprawdz(string rodzaj)
         {
             using (var ctx = new DbModel())
             {
-                //  var ask = "SELECT data From TAtrakcja WHERE rodzaj == '" + rodzaj + "'";
-                //  var tmp = ctx.TAtrakcja.FromSql(ask);
+                
 
                 var tmp = ctx.TAtrakcja.Where(a => a.rodzaj == rodzaj);
 
