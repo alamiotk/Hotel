@@ -93,7 +93,7 @@ namespace Uwp_App
                 return;
             }
 
-            var res = await MSB.InputChoise("Wybierz typ rezerwacji", "Basen", "Spa");
+            var res = await MSB.InputChoise("Wybierz typ atrakcji", "Basen", "Spa");
 
             var rodzaj = "";
             if (res == ContentDialogResult.Primary)
