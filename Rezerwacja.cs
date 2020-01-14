@@ -30,13 +30,13 @@ namespace Uwp_App
 
         public async void DodajRezerwacje(string imie, string nazwisko, int pesel, string adres, int nRezerwacji, int nrPokoju)
         {
-            // Dawne klasy klient osoba, której anie razu nie użyłęm i EntityFramework nie potrafił zrobic poprawnej migracji
+            
             this.imie = imie;
             this.nazwisko = nazwisko;
             this.pesel = pesel;
             this.adres = adres;            
            
-                // po nr rezerwacji mozna sprawdzi kto to    
+             
 
 
             Przyjazd = await MSB.InputDate();
@@ -60,10 +60,7 @@ namespace Uwp_App
                 var wolnepokoje = new List<int>();
 
 
-                /*
-                for (int i = 0; i < 10; i++) // sprawdza wszytskie pokoje
-                {
-                */
+            
                 int i = nrPokoju; // sprawdza pokoj ktory podano
 
 
@@ -99,7 +96,7 @@ namespace Uwp_App
                     wolnepokoje.Add(i); // kazder rezerwacji nie przeszkadza termin
                 }
 
-                //}  //end for
+               
 
                 if (wolnepokoje.Count == 0)
                 {
@@ -151,11 +148,7 @@ namespace Uwp_App
 
 
 
-                //}
-                //catch
-                //{
-                //    await MSB.Print("Brak pokoi w hotelu");
-                //}
+               
             }
 
         }
@@ -179,44 +172,34 @@ namespace Uwp_App
 
                     nrPokoju = item.nrPokoju;
 
-                   // klient = tmp.FirstOrDefault().klient;
-
-                    // Autoryzacja Zakładam że autoryzacja z góry przebiegla pomyślnie, ponieważ przy wejściu do aplikacji to sprawdzam
-
-                    //var ask2 = "DELETE FROM TRezerwacja WHERE nRezerwacji ==  " + nRezerwacji;
-
+                 
                     ctx.Remove(ctx.TRezerwacja.Single(a => a.nRezerwacji == nRezerwacji));
                     await ctx.SaveChangesAsync();
 
 
-                    // ctx.TRezerwacja.FromSql(ask2);
+                   
 
                     var wyjazd = Przyjazd.AddDays(Dlugosc);
-                    //wyjazd.AddDays(Dlugosc);
+                   
 
                     await MSB.Print(String.Format("Rezerwacja pokoju {0} dla {1} {2} usunięta od {3} do {4}", item.nrPokoju, item.imie, item.imie, Przyjazd.ToString(), wyjazd.ToString()));
-                    //}
+                    
 
-                } // wyrzuci błąd bo gdy nie ma nr klucza dla danego nr rezerwacji wartośc jest null em
+                }
                 catch
                 {
-                    await MSB.Print("Rezerwacja nr: " + nRezerwacji + " nie istnieje"); // raczej nie powiino się to pojawić skoro wczesniej sprawdzano to
+                    await MSB.Print("Rezerwacja nr: " + nRezerwacji + " nie istnieje");
                 }
             }
 
         }
 
-        /// <summary>
-        /// Sprawdza czy istneije rezerwacja o tym numerze
-        /// </summary>
-        /// <param name="nRezerwacji"></param>
-        /// <returns></returns>
+      
         public bool SprawdzRezerwacje(int nRezerwacji)
         {
             using (var ctx = new DbModel())
             {
-                //var ask = "SELECT " + nRezerwacji + " From TRezerwacja";
-                //var tmp = ctx.TRezerwacja.FromSql(ask);
+              
 
                 foreach (var item in ctx.TRezerwacja.ToList())
                 {
@@ -228,14 +211,7 @@ namespace Uwp_App
 
 
 
-                //try
-                //{
-                //    if (tmp.FirstOrDefault() != null) //jesli cos jest
-                //    {
-                //        return true;
-                //    }
-                //}
-                //finally { }
+              
             }
             return false;
         }
@@ -243,21 +219,18 @@ namespace Uwp_App
 
         private DateTime CombineDateAndTime(DateTime dateObj, DateTime timeObj)
         {
-            //DateTime timeObj = new DateTime().Add(time);
+           
             DateTime newDateTime;
 
-            //newDateTime.add
-
-            //get timespan from the date object
+           
             TimeSpan spanInDate = dateObj.TimeOfDay;
 
-            //subtract it to set date objects time to 0:00
             dateObj = dateObj.Subtract(spanInDate);
 
-            //now add your newTime to date object
+           
             newDateTime = dateObj.Add(timeObj.TimeOfDay);
 
-            //return new value
+           
             return newDateTime;
         }
     }
