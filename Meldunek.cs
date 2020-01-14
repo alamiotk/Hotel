@@ -37,8 +37,7 @@ namespace Uwp_App
         {
             using (var ctx = new DbModel())
             {
-                //var ask = "SELECT nrKlucza FROM TMeldunek WHERE nRezerwacji == " + nrKlucza;
-                //var tmp = ctx.TMeldunki.FromSql(ask);
+                
                 var tmp = ctx.TMeldunki.Where(a => a.nrKlucza == nrKlucza).ToArray();
 
                 if(tmp.Count() == 0)
@@ -59,7 +58,7 @@ namespace Uwp_App
             }
         }
 
-        public async void SprawdzPlatnosc(int nRezerwacji) // skoro ma zwracac void a -> to nieważne co tu się stanie, ale na sequencediagram_meldunek zwracany typ to void a w zależności od wyniku tej fukcji ma się wykonać część kodu mawet na diagramie jest to: zwraca void a a ma po bool u działać potem ??
+        public async void SprawdzPlatnosc(int nRezerwacji) 
         {
             var payment = new Platnosc();
             var res = await payment.ZaplacAsync(nRezerwacji);
